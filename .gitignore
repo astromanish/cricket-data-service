@@ -1,2 +1,6 @@
+old.ipynb
+main.ipynb
 reference
+**/__pycache__/
 data
+test-data
