@@ -10,7 +10,7 @@ match_summary_file_name = 'matchSummary'
 match_inning1_file_name = 'innings1'
 match_inning2_file_name = 'innings2'
 
-# key value of relevent data in json objects of collected data 
+# key value of relevant data in json objects of collected data
 match_result_key = 'Result'
 match_player_key = 'squad'
 match_summary_key = 'MatchSummary'
