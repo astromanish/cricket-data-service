@@ -1,1 +1,0 @@
-LOCAL_DELTA_LAKE_PATH = './../../'

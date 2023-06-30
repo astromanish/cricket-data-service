@@ -1,1 +1,0 @@
-## Script to Store Created Tables to Delta Lake Storage
