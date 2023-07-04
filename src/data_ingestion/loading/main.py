@@ -1,7 +1,7 @@
-from config import data_feeds_path, squad_feeds_path, other_tournament_data_path
-from config import match_schedule_file_name, match_summary_file_name, match_inning1_file_name, match_inning2_file_name, match_squad_file_name
-from config import match_result_key, match_player_key, match_summary_key, match_batting_card_key, match_batting_head_to_head_key, match_bowling_card_key, match_bowling_head_to_head_key, match_extras_key, match_fall_of_wickets_key, match_manhattan_graph_key, match_manhattan_wickets_key, match_partnership_break_key, match_over_history_key, match_wagon_wheel_key, match_wagon_wheel_summary_key, match_partnership_scores_key
-from utils import read_json_files, read_csv_files, combine_squad_data, combine_innings_data, convert_json_list_to_df
+from .config import data_feeds_path, squad_feeds_path, other_tournament_data_path
+from .config import match_schedule_file_name, match_summary_file_name, match_inning1_file_name, match_inning2_file_name, match_squad_file_name
+from .config import match_result_key, match_player_key, match_summary_key, match_batting_card_key, match_batting_head_to_head_key, match_bowling_card_key, match_bowling_head_to_head_key, match_extras_key, match_fall_of_wickets_key, match_manhattan_graph_key, match_manhattan_wickets_key, match_partnership_break_key, match_over_history_key, match_wagon_wheel_key, match_wagon_wheel_summary_key, match_partnership_scores_key
+from .utils import read_json_files, read_csv_files, combine_squad_data, combine_innings_data, convert_json_list_to_df
 
 def load_match_result_data():
     match_schedule_json_data_list = read_json_files(data_feeds_path, match_schedule_file_name, 14, 2)

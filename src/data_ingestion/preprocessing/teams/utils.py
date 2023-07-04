@@ -2,7 +2,24 @@ import inflection
 import pandas as pd
 
 def clean_match_summary_data(match_summary):
-    match_summary.loc[match_summary.competition_name =='BIG BASH LEAGUE 2018-19', 'competition_name'] = 'BBL 2018-19'
+    match_summary.loc[match_summary.CompetitionName =='BIG BASH LEAGUE 2018-19', 'CompetitionName'] = 'BBL 2018-19'
+
+def create_winning_team_id_column(match_df):
+    match_df['winning_team_id'] = ''
+
+    for index, row in match_df.iterrows():
+        comments = row['Comments']
+        first_batting_team_name = row['FirstBattingTeamName']
+        first_batting_team_id = row['FirstBattingTeamID']
+        second_batting_team_name = row['SecondBattingTeamName']
+        second_batting_team_id = row['SecondBattingTeamID']
+
+        if first_batting_team_name in comments:
+            match_df.at[index, 'winning_team_id'] = first_batting_team_id
+        elif second_batting_team_name in comments:
+            match_df.at[index, 'winning_team_id'] = second_batting_team_id
+
+    return match_df
 
 def preapare_data(match_result, match_summary, match_player):
     match_result = create_winning_team_id_column(match_result)

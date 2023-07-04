@@ -1,12 +1,13 @@
 # path of collected data
-data_feeds_path = './../test-data/Data_Feeds'
-squad_feeds_path = './../test-data/Squad_Feeds'
-other_tournament_data_path = './../test-data/other-tournaments-data'
+data_path = '/home/astromanish/projects/cricket-data-service/data/raw/dev'
+data_feeds_path = f'{data_path}'
+squad_feeds_path = f'{data_path}'
+other_tournament_data_path = f'{data_path}'
 
 # file name of collected data 
 match_schedule_file_name = 'matchSchedule'
 match_squad_file_name = 'squad'
-match_summary_file_name = 'matchSummary' 
+match_summary_file_name = 'matchsummary' 
 match_inning1_file_name = 'innings1'
 match_inning2_file_name = 'innings2'
 
