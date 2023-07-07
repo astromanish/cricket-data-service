@@ -1,7 +1,8 @@
 # path of collected data
-data_path = '/home/astromanish/projects/cricket-data-service/data/raw/dev'
-data_feeds_path = f'{data_path}'
-squad_feeds_path = f'{data_path}'
+data_path = r"C:\Users\Manish92.Singh\Desktop\jio\data\raw\dev"
+
+data_feeds_path = f'{data_path}\Data_Feeds'
+squad_feeds_path = f'{data_path}\Squad_Feeds'
 other_tournament_data_path = f'{data_path}'
 
 # file name of collected data 

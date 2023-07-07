@@ -1,8 +1,10 @@
 import sys 
 import pickle
+import datetime
+
 
 # from collection import collect_data
-from loading.main import load_match_result_data, load_match_summary_data, load_match_player_data
+from loading.main import load_match_result_data, load_match_summary_data, load_match_player_data, load_match_ball_data
 from preprocessing.teams.main import process_teams
 from preprocessing.players.main import process_players
 sys.path.append('./../')
@@ -15,19 +17,22 @@ def collect_load_preprocess_insert():
     # collect_data()
 
     #### Data loading ####
+    load_timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     # match_result_data = load_match_result_data()
     # match_summary_data = load_match_summary_data()
-    match_player_data = load_match_player_data()
+    # match_player_data = load_match_player_data()
+    match_ball_data = load_match_ball_data()
+    print(match_ball_data.head())
     
     #### Data preprocessing ####
     # processed_teams = process_teams(match_result_data, match_summary_data, match_player_data)
-    processed_players = process_players(match_player_data)
+    # processed_players = process_players(match_player_data)
 
     #### Insertion into database ####
     # serialized_df = pickle.dumps(processed_teams)
     # update_existing_data(serialized_df, 'teams')
-    serialized_players_df = pickle.dumps(processed_players)
-    update_existing_data(serialized_players_df,'players')
+    # serialized_players_df = pickle.dumps(processed_players)
+    # update_existing_data(serialized_players_df,'players')
     
     #### Print Success #### 
     # print("Data collection, loading, preprocessing, and insertion completed successfully!")

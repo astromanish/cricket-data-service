@@ -36,7 +36,7 @@ def read_csv_files(folder_path):
     file_paths = list(Path(folder_path).rglob("*.csv"))
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        futures = [executor.submit(pd.read_csv, path) for path in file_paths]
+        futures = [executor.submit(pd.read_csv, path, dtype={'column20': str, 'column21': str}) for path in file_paths]
 
         for future in concurrent.futures.as_completed(futures):
             df = future.result()
