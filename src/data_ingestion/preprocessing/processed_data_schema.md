@@ -88,23 +88,23 @@
 | id          | INT          |                          |
 | competition_name | VARCHAR |                          |
 | season      | INT          |                          |
-| match_id    | INT          |                          |
+| match_id    | INT          |            done              |
 | over_number | INT          |                          |
 | ball_number | INT          |                          |
 | over_text   | VARCHAR      |                          |
 | batsman_id  | INT          |                          |
-| non_striker_id | INT       |                          |
+| non_striker_id | INT       |             done             |
 | batting_position | SMALLINT |                          |
 | batsman_team_id | INT      |                          |
 | batting_phase | SMALLINT   |                          |
 | against_bowler | INT       |                          |
 | bowler_team_id | INT       |                          |
 | innings     | SMALLINT     |                          |
-| runs        | SMALLINT     |                          |
-| ball_runs   | SMALLINT     |                          |
-| is_one      | TINYINT      |                          |
-| is_two      | TINYINT      |                          |
-| is_three    | TINYINT      |                          |
+| runs        | SMALLINT     |               done           |
+| ball_runs   | SMALLINT     |               done           |
+| is_one      | TINYINT      |           done               |
+| is_two      | TINYINT      |            done              |
+| is_three    | TINYINT      |            done              |
 | is_four     | TINYINT      |                          |
 | is_six      | TINYINT      |                          |
 | is_dot_ball | TINYINT      |                          |
