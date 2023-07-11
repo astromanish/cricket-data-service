@@ -18,6 +18,6 @@ def query_existing_data(table_name, sql_query):
 
 def update_existing_data(serialized_df, table_name):
     df = pickle.loads(serialized_df)
-    table_path = f'{LOCAL_DELTA_LAKE_PATH}/{table_name}'
+    table_path = f'{local_delta_lake_path}/{table_name}'
     write_deltalake(table_path,df)
     
