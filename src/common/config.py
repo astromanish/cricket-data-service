@@ -1,5 +1,16 @@
 import os
 
+# Innings configs
+
+OVER_HISTORY_REQD_COLS = ['BallID', 'MatchID', 'InningsNo', 'StrikerID', 'BowlerID', 'OutBatsManID', \
+                    'OverNo', 'BallNo', 'Runs', 'IsOne', 'IsTwo', 'IsThree', 'IsDotball', 'Extras', 'IsExtra', \
+                    'IsWide', 'IsNoBall', 'IsBye', 'IsLegBye', 'IsFour', 'IsSix', 'IsWicket', 'WicketType', \
+                    'IsBowlerWicket', 'Xpitch', 'Ypitch', 'IsMaiden', 'Line', 'BowlType', 'Length', \
+                    'ShotType', 'CommentOver', 'BallRuns', 'NonStrikerID', 'IsBeaten', \
+                    'IsUncomfortable', 'BowlingDirection', 'VideoFile']
+
+WAGONWHEEL_REQD_COLS = ['BallID', 'FielderAngle', 'FielderLengthRatio']
+
 HOME_DIR = ''
 # below mentioned paths are for DEV purpose only, for prod, paths are being passed through run.sh
 ROOT_DATA_PATH = os.path.join(HOME_DIR, "data/Data_Feeds/")
@@ -51,16 +62,7 @@ MATCHES_REQD_COLS = ["MatchID", "MatchDate", "MatchTime", "FirstBattingTeamID", 
                      "GroundName", "Comments", "TossTeam", "TossDetails", "FirstBattingSummary", \
                      "SecondBattingSummary", "competition_name", "seasons"]
 
-# Innings configs
 
-INNINGS_REQD_COLS = 'BallID', 'MatchID', 'InningsNo', 'StrikerID', 'BowlerID', 'OutBatsManID', \
-                    'OverNo', 'BallNo', 'Runs', 'IsOne', 'IsTwo', 'IsThree', 'IsDotball', 'Extras', 'IsExtra', \
-                    'IsWide', 'IsNoBall', 'IsBye', 'IsLegBye', 'IsFour', 'IsSix', 'IsWicket', 'WicketType', \
-                    'IsBowlerWicket', 'Xpitch', 'Ypitch', 'IsMaiden', 'Line', 'BowlType', 'Length', \
-                    'ShotType', 'CommentOver', 'BallRuns', 'competition_name', 'season', 'NonStrikerID', 'IsBeaten', \
-                    'IsUncomfortable', 'BowlingDirection', 'VideoFile'
-
-WAGONWHEEL_REQD_COLS = 'BallID', 'FielderAngle', 'FielderLengthRatio', 'FielderLengthRation'
 BATTING_REQD_COLS = 'PlayerID', 'PlayingOrder', 'TeamID'
 BOWLING_REQD_COLS = 'PlayerID', 'TeamID'
 INNINGS_KEY_COL = 'id'

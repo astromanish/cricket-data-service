@@ -6,16 +6,16 @@ load_dotenv()
 
 data_path = os.getenv('data_path')
 
-data_feeds_path = f'{data_path}\Data_Feeds'
-squad_feeds_path = f'{data_path}\Squad_Feeds'
-other_tournament_data_path = f'{data_path}\other-tournament-data'
+data_feeds_path = f'{data_path}/Data_Feeds'
+squad_feeds_path = f'{data_path}/Squad_Feeds'
+other_tournament_data_path = f'{data_path}/other-tournament-data'
 
 # file name of collected data 
 match_schedule_file_name = 'matchSchedule'
 match_squad_file_name = 'squad'
 match_summary_file_name = 'matchsummary' 
-match_inning1_file_name = 'innings1'
-match_inning2_file_name = 'innings2'
+match_inning1_file_name = 'Innings1'
+match_inning2_file_name = 'Innings2'
 
 # key value of relevant data in json objects of collected data
 match_result_key = 'Result'

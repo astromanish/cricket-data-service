@@ -14,7 +14,7 @@ from preprocessing.teams.main import process_teams
 from preprocessing.players.main import process_players
 # from preprocessing.venue.main import process_venues
 # from preprocessing.matches.main import process_matches
-# from preprocessing.match_ball_summary.main import process_match_ball_summary
+from preprocessing.match_ball_summary.main import process_match_ball_summary
 
 #functions for data insertion 
 sys.path.append('./../')
@@ -34,8 +34,8 @@ def collect_load_preprocess_insert():
     match_result_data = load_match_result_data()
     match_summary_data = load_match_summary_data()
     match_player_data = load_match_player_data()
-    # match_ball_data = load_match_ball_data()
-    # match_innings_data = load_match_innings_data()
+    match_ball_data = load_match_ball_data()
+    match_innings_tuple_data = load_match_innings_data()
     
     #### Data preprocessing ####
     
@@ -43,7 +43,7 @@ def collect_load_preprocess_insert():
     processed_players = process_players(match_player_data)
     # processed_venues = process_venues()
     # processed_matches = process_matches()
-    # processed_match_ball_summary = process_match_ball_summary()
+    processed_match_ball_summary = process_match_ball_summary(match_innings_tuple_data)
 
     #### Insertion into database ####
     
