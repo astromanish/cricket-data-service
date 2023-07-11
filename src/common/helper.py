@@ -2,7 +2,6 @@ from pathlib import Path
 from tabulate import tabulate
 import pandas as pd
 import re
-from environs import Env
 import os
 import json
 import json
@@ -13,10 +12,6 @@ from os import listdir
 import base64
 import io
 import csv
-
-from common.utils.helper import pandas_factory
-from cassandra.concurrent import execute_concurrent
-from common.dao.fetch_db_data import getPandasFactoryDF
 
 
 #################################  Data Access Object ############################

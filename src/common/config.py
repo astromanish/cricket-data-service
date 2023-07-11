@@ -1,8 +1,6 @@
 import os
 
-from common.utils.helper import getEnvVariables, get_project_root
-
-HOME_DIR = get_project_root()
+HOME_DIR = ''
 # below mentioned paths are for DEV purpose only, for prod, paths are being passed through run.sh
 ROOT_DATA_PATH = os.path.join(HOME_DIR, "data/Data_Feeds/")
 IPL_2022_PATH = os.path.join(ROOT_DATA_PATH, 'IPL/IPL 2022/')
@@ -18,7 +16,7 @@ FITNESS_DATA = os.path.join(HOME_DIR, 'data/fitness_data.csv')
 BOWLING_PLANNING_TEMPLATE = os.path.join(HOME_DIR, 'data/bowling-planning-template.xlsx')
 CONTRIBUTION_SCORE_TABLE_NAME = 'contributionScore'
 FTP_PATH = "MI2022"
-IMAGE_STORE_URL = getEnvVariables("IMAGE_STORE_URL")
+IMAGE_STORE_URL = ''
 OTHER_TOURNAMENTS_DATA_PATH = os.path.join(HOME_DIR, "data/other-tournaments-data/")
 OTHER_TOURNAMENTS_MAPPING_FILE = os.path.join(HOME_DIR, "data/mapping-sheet-other-tournaments.xlsx")
 PLAYER_LIST_2023_FILE = os.path.join(HOME_DIR, "data/player_list_2023.csv")
