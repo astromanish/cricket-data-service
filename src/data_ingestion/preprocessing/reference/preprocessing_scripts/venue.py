@@ -1,17 +1,17 @@
 import sys
 sys.path.append("./../../")
 sys.path.append("./")
-from log.log import get_logger
+import pandas as pd
+import numpy as np
+
 from common.dao.fetch_db_data import getMaxId, getAlreadyExistingValue
 from DataIngestion.query import GET_VENUE_DETAILS_SQL
 from common.db_config import DB_NAME
 from DataIngestion.utils.helper import readJsFile, excludeAlreadyExistingRecords, generateSeq, readExcel, \
     random_string_generator
 from DataIngestion.config import (VENUE_TABLE_NAME, VENUE_KEY_COL)
-import pandas as pd
-import numpy as np
 
-logger = get_logger("Ingestion", "Ingestion")
+
 
 
 def getOtherVenues(mapping_sheet_path):
@@ -30,7 +30,6 @@ def getOtherVenues(mapping_sheet_path):
 
 
 def getVenueData(session, root_data_files, other_data_files, mapping_sheet_path, load_timestamp):
-    logger.info("Venue Data Generation Started!")
     if root_data_files or other_data_files:
         if root_data_files:
             path_set = set(value for key, value in root_data_files.items()
@@ -65,11 +64,9 @@ def getVenueData(session, root_data_files, other_data_files, mapping_sheet_path,
 
         # Generating and adding the sequence to the primary key and converting it to dictionary
         venue_final_data = generateSeq(venues_df, VENUE_KEY_COL, max_key_val).to_dict(orient='records')
-        logger.info("Venue Data Generation Completed!")
         return venue_final_data
 
     else:
-        logger.info("No New Venue Data Available!")
 
 
 # if __name__=="__main__":

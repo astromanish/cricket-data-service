@@ -1,8 +1,11 @@
 import sys
 sys.path.append("./../../")
 sys.path.append("./")
+import pandas as pd
+import numpy as np
+
+
 from common.dao_client import session
-from log.log import get_logger
 from common.dao.fetch_db_data import getMaxId, getPandasFactoryDF
 from DataIngestion.utils.helper import getSquadRawData, readExcel, random_string_generator, getOtherTournamentsDF
 from DataIngestion.config import (SQUAD_KEY_LIST,
@@ -11,11 +14,8 @@ from DataIngestion.config import (SQUAD_KEY_LIST,
                                   PLAYERS_REQD_COLS, IMAGE_STORE_URL)
 from common.db_config import DB_NAME
 from DataIngestion.query import (GET_TEAM_SQL, GET_PLAYERS_SQL)
-import numpy as np
 from ethnicolr import pred_wiki_name
-import pandas as pd
 
-logger = get_logger("Ingestion", "Ingestion")
 
 
 # function to generate player_type based on player_name
@@ -56,7 +56,6 @@ def getPlayerType(players_type_df):
 
 
 def getPlayersData(session, squad_data_files, other_tournament_data_files, mapping_sheet_path, load_timestamp):
-    logger.info("Players Data Generation Started!")
     if squad_data_files or other_tournament_data_files:
         if squad_data_files:
             players_df = getSquadRawData(squad_data_files, SQUAD_KEY_LIST, PLAYERS_REQD_COLS) \
@@ -143,14 +142,11 @@ def getPlayersData(session, squad_data_files, other_tournament_data_files, mappi
             players_final_df = new_players_df.append(updated_players_df)
             players_final_df['team_id'] = players_final_df['team_id'].fillna(-1).astype(int)
  
-            logger.info("Players Data Generation Completed!")
             return players_final_df.to_dict(orient='records')
     else:
-        logger.info("No New Players Data Available!")
 
 
 def get2022Players(session, MISSING_SQUAD_2022, MISSING_PLAYERS_2022, load_timestamp):
-    logger.info("Players 2022 Data Generation Started!")
     GET_PLAYERS_DATA = f'''select src_player_id, player_id, player_name, batting_type, bowling_type, player_skill,
     is_captain, is_batsman, is_bowler, is_wicket_keeper, player_type, bowl_major_type
      from {DB_NAME}.Players; '''
@@ -201,7 +197,6 @@ def get2022Players(session, MISSING_SQUAD_2022, MISSING_PLAYERS_2022, load_times
                                                       how='left') \
             .drop(["team_short_name"], axis=1)
 
-        logger.info("Players 2022 Data Generation Completed!")
         return missing_players_df.to_dict(orient='records')
 
 

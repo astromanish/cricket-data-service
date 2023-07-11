@@ -4,11 +4,19 @@ import pandas as pd
 import re
 from environs import Env
 import os
+import json
+import json
+import numpy as np
+import pandas as pd
+from os.path import isfile, join
+from os import listdir
+import base64
+import io
+import csv
 
 from common.utils.helper import pandas_factory
-from log.log import get_logger
-
-logger = get_logger("Ingestion", "Ingestion")
+from cassandra.concurrent import execute_concurrent
+from common.dao.fetch_db_data import getPandasFactoryDF
 
 
 #################################  Data Access Object ############################
@@ -28,11 +36,9 @@ def getMaxId(session, table_name, id_col, db_name):
     select_sql = "SELECT max({}) as max FROM {}.{};".format(id_col, db_name, table_name)
     rows = getPandasFactoryDF(session, select_sql)
     if rows["max"].iloc[0] is None:
-        logger.info("Max id for table={} is 1".format(table_name))
         return 1
     else:
         max_val = rows["max"].iloc[0] + 1
-        logger.info("Max id for table={} is {}".format(table_name, max_val))
         return max_val
 
 
@@ -43,13 +49,9 @@ def getAlreadyExistingValue(session, select_sql):
     data_list = [row for row in rows.iloc[:, 0]]
     return data_list
 
-import json
 
-from cassandra.concurrent import execute_concurrent
 
-from log.log import get_logger
 
-logger = get_logger("Ingestion", "Ingestion")
 
 
 # This function takes in session and data as input and insert the records to the provided db and table
@@ -58,9 +60,7 @@ def insertToDB(session, data_list, db_name, table_name):
     for jData in data_list:
         insert_stmt = "insert into {}.{} JSON \'{}\';".format(db_name, table_name, json.dumps(jData))
         statements_and_params.append((insert_stmt, ()))
-    logger.info("Insert Started for --> {}".format(table_name))
     execute_concurrent(session, statements_and_params, concurrency=50)
-    logger.info("Insert Completed for --> {}".format(table_name))
 
 
 # this function deletes the records, taking input as list of data
@@ -73,11 +73,8 @@ def upsertDatatoDB(session, data_list, db_name, table_name, key_col):
         else:
             key_li = key_li[0]
             clause = f"where {key_col} = {key_li}"
-        logger.info("Delete Started for --> {}".format(table_name))
         delete_stmt = f"delete from {db_name}.{table_name} {clause};"
-        logger.info("Delete Statement --> {}".format(delete_stmt))
         session.execute(delete_stmt)
-        logger.info("Delete Completed for --> {}".format(table_name))
 
         # after deleting updated records, inserting the latest records
         insertToDB(session, data_list, db_name, table_name)
@@ -85,10 +82,8 @@ def upsertDatatoDB(session, data_list, db_name, table_name, key_col):
 
 # this function truncates the given table
 def truncateTable(session, db_name, table_name):
-    logger.info("Truncate started for --> {}.{}".format(db_name, table_name))
     truncate_stmt = "truncate table {}.{}".format(db_name, table_name)
     session.execute(truncate_stmt)
-    logger.info("Truncate completed for --> {}.{}".format(db_name, table_name))
     
 ################################# Common Utils Functions ##################################
 
@@ -127,15 +122,7 @@ def getTeamsMapping():
 
 ############################ Data Ingestion Utils Functions ######################
 
-import json
-import numpy as np
-import pandas as pd
-from os.path import isfile, join
-from os import listdir
-from common.dao.fetch_db_data import getPandasFactoryDF
-import base64
-import io
-import csv
+
 
 # Reads .js file and return json data as output
 

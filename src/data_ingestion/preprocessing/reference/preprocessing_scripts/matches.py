@@ -1,8 +1,11 @@
 import sys
 sys.path.append("./../../")
 sys.path.append("./")
-from log.log import get_logger
 import pandas as pd
+from datetime import datetime
+import numpy as np
+
+
 from DataIngestion.config import MATCHES_TABLE_NAME, MATCHES_KEY_COL, MATCHES_REQD_COLS, SQUAD_KEY_LIST
 from common.dao.fetch_db_data import getPandasFactoryDF, getMaxId
 from DataIngestion.query import GET_TEAM_SQL, GET_EXISTING_MATCHES_SQL
@@ -12,16 +15,13 @@ from DataIngestion.utils.helper import readJsFile, dataToDF, generateSeq, getSqu
 from DataIngestion.query import (GET_PLAYER_DETAILS_SQL, GET_VENUE_DETAILS_SQL)
 from common.db_config import DB_NAME
 import pandasql as psql
-from datetime import datetime
-import numpy as np
+
 
 pd.options.mode.chained_assignment = None
 
-logger = get_logger("Ingestion", "Ingestion")
 
 
 def getMatchesData(session, root_data_files, squad_data_files, PITCH_TYPE_DATA_PATH, load_timestamp, pitch_data_path_2019_to_2021):
-    logger.info("Matches Data Generation Started!")
     if root_data_files:
         path_set = set(value for key, value in root_data_files.items()
                        if 'matchschedule' in key.split("-")[1].split(".")[0].strip().lower())
@@ -168,11 +168,9 @@ def getMatchesData(session, root_data_files, squad_data_files, PITCH_TYPE_DATA_P
                                              MATCHES_KEY_COL, max_key_val) \
                 .to_dict(orient='records')
 
-            logger.info("Matches Data Generation Completed!")
             return final_matches_data
 
     else:
-        logger.info("No New Matches Data Available!")
 
 
 def getOtherMatchesData(other_tournament_data_files, session, mapping_sheet_path, load_timestamp):
@@ -346,11 +344,7 @@ def getOtherMatchesData(other_tournament_data_files, session, mapping_sheet_path
                                              .drop('inn1_bowl_team', axis=1).sort_values(['competition_name', 'match_date_form']),
                                              MATCHES_KEY_COL, max_key_val).to_dict(orient='records')
 
-            logger.info("Other Matches Data Generation Completed!")
             return final_matches_data
-
-    else:
-        logger.info("No Other Matches Data Available!")
         
 
 # if __name__=="__main__":

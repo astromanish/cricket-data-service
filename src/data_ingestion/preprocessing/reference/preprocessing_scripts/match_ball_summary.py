@@ -1,8 +1,10 @@
+import pandas as pd
+import numpy as np
 import sys
 sys.path.append("./../../")
 sys.path.append("./")
+
 from DataService.utils.helper import executeQuery, createCon
-from log.log import get_logger
 from DataIngestion.config import INNINGS_REQD_COLS, WAGONWHEEL_REQD_COLS, \
     INNINGS_KEY_COL, INNINGS_TABLE_NAME, OTHER_TOURNAMENTS_INNINGS_TABLE, OTHER_TOURNAMENTS_INNINGS_KEY_COL
 from common.dao.fetch_db_data import getPandasFactoryDF, getMaxId
@@ -10,15 +12,11 @@ from DataIngestion.query import GET_MATCHES_DETAILS_SQL, GET_PLAYER_DETAILS_SQL,
     GET_BOWL_CARD_DATA, GET_VENUE_DETAILS_SQL, GET_TEAM_SQL, GET_MATCH_SUMMARY
 from DataIngestion.utils.helper import readJsFile, dataToDF, generateSeq, getRawDict, getOtherTournamentsDF, readExcel, \
     getPlayersDataDF
-import pandas as pd
-import numpy as np
 from common.db_config import DB_NAME
 
-logger = get_logger("Ingestion", "Ingestion")
 
 
 def getMatchBallSummaryData(session, root_data_files, load_timestamp):
-    logger.info("Ball Summary Data Generation Started!")
     if root_data_files:
         # Getting max match_id from target table
         max_key_val = getMaxId(session, INNINGS_TABLE_NAME, INNINGS_KEY_COL, DB_NAME)
@@ -186,15 +184,12 @@ def getMatchBallSummaryData(session, root_data_files, load_timestamp):
                                          max_key_val) \
             .to_dict(orient='records')
 
-        logger.info("Ball Summary Data Generation Completed!")
         return final_innings_data
     else:
-        logger.info("No New Teams Data Available!")
 
 
 def getOtherMatchesBallSummary(session, other_data_files, mapping_sheet_path, load_timestamp):
 
-    logger.info("Other Matches Ball Summary Data Generation Started!")
 
     if other_data_files:
         con = createCon()
@@ -286,11 +281,9 @@ left join teams_df tdf2 on (tdf2.team_name=ftd.bowling_team) '''
                                          OTHER_TOURNAMENTS_INNINGS_KEY_COL,
                                          max_key_val)
 
-        logger.info("Other Matches Ball Summary Data Generation Completed!")
         return ball_by_ball_df.to_dict(orient="records")
 
     else:
-        logger.info("No New Other Matches Ball Summary Data Available!")
 
 
 # if __name__=="__main__":
