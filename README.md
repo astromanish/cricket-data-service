@@ -18,10 +18,3 @@ The Cricket Data Service is a comprehensive and professional system designed to 
 - Providing various cricket-related APIs over the stored data: The Cricket Data Service offers a range of APIs that enable users to access and utilize the cricket data for analysis, research, and decision-making purposes.
 
 For detailed instructions on setting up and utilizing the Cricket Data Service, please refer to the comprehensive technical documentation. It provides step-by-step guidance and additional information to help you make the most of the service.
-
-
-TODO: 
-
-1. Utilily functions - common.utils.helper and data_ingestion.utils.helper are now in common.helper
-2. 
-    
