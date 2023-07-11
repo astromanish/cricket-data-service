@@ -11,6 +11,13 @@ OVER_HISTORY_REQD_COLS = ['BallID', 'MatchID', 'InningsNo', 'StrikerID', 'Bowler
 
 WAGONWHEEL_REQD_COLS = ['BallID', 'FielderAngle', 'FielderLengthRatio']
 
+# Match Result configs
+
+MATCHES_RESULT_REQD_COLS = ["MatchID", "MatchDate", "MatchTime", "FirstBattingTeamID", "MatchDateOrder", "MatchName", \
+                     "FirstBattingTeamName", "SecondBattingTeamID", "SecondBattingTeamName", \
+                     "GroundName", "Comments", "TossTeam", "TossDetails", "FirstBattingSummary", \
+                     "SecondBattingSummary", "competition_name", "seasons"]
+
 HOME_DIR = ''
 # below mentioned paths are for DEV purpose only, for prod, paths are being passed through run.sh
 ROOT_DATA_PATH = os.path.join(HOME_DIR, "data/Data_Feeds/")

@@ -3,14 +3,14 @@
 | Column Name | Data Type    | Description              |
 |-------------|--------------|--------------------------|
 | team_id     | INT          |                          |
-| src_team_id | VARCHAR      | schedule                 |
-| team_name   | VARCHAR      | schedule                 |
-| team_short_name | varchar  | squad                    |
-| competition_name | varchar | summary                  |
-| team_image_url | VARCHAR   | summary                  |
-| playoffs    | INT          | schedule                 |
-| seasons_played | LIST<INT> | summary                  |
-| titles      | INT          | schedule                 |
+| src_team_id | VARCHAR      | done                 |
+| team_name   | VARCHAR      |                  |
+| team_short_name | varchar  |                     |
+| competition_name | varchar | done                  |
+| team_image_url | VARCHAR   |                   |
+| playoffs    | INT          | done                 |
+| seasons_played | LIST<INT> | done                  |
+| titles      | INT          | done                 |
 | load_timestamp | timestamp  |                          |
 
 **Table: Players**
@@ -51,19 +51,19 @@
 | Column Name | Data Type    | Description              |
 |-------------|--------------|--------------------------|
 | match_id    | INT          |                          |
-| src_match_id | VARCHAR     |                          |
-| match_name  | VARCHAR      |                          |
-| competition_name | VARCHAR |                          |
+| src_match_id | VARCHAR     |            done              |
+| match_name  | VARCHAR      |              done            |
+| competition_name | VARCHAR |           done               |
 | venue       | INT          |                          |
 | is_playoff  | TINYINT      |                          |
 | is_title    | TINYINT      |                          |
 | team1       | INT          |                          |
 | team2       | INT          |                          |
-| toss_team   | INT          |                          |
+| toss_team   | INT          |           done               |
 | toss_decision | VARCHAR    |                          |
 | match_date  | VARCHAR      |                          |
 | match_time  | varchar      |                          |
-| season      | INT          |                          |
+| season      | INT          |         done                 |
 | team1_players | list<INT>  |                          |
 | team2_players | list<INT>  |                          |
 | team1_score | INT          |                          |
