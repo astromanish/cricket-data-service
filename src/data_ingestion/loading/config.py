@@ -1,9 +1,14 @@
-# path of collected data
-data_path = r"C:\Users\Manish92.Singh\Desktop\jio\data\raw\dev"
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+data_path = os.getenv('data_path')
 
 data_feeds_path = f'{data_path}\Data_Feeds'
 squad_feeds_path = f'{data_path}\Squad_Feeds'
-other_tournament_data_path = f'{data_path}'
+other_tournament_data_path = f'{data_path}\other-tournament-data'
 
 # file name of collected data 
 match_schedule_file_name = 'matchSchedule'
