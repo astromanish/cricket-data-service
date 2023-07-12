@@ -59,38 +59,40 @@ Ball Summary
 
 **Table: Matches**
 
+1. get venue details
+
 | Column Name | Data Type    | Description              |
 |-------------|--------------|--------------------------|
-| match_id    | INT          |                          |
+| match_id    | INT          |           done               |
 | src_match_id | VARCHAR     |            done              |
 | match_name  | VARCHAR      |              done            |
 | competition_name | VARCHAR |           done               |
 | venue       | INT          |                          |
-| is_playoff  | TINYINT      |                          |
-| is_title    | TINYINT      |                          |
-| team1       | INT          |                          |
-| team2       | INT          |                          |
-| toss_team   | INT          |           done               |
+| is_playoff  | TINYINT      |             done             |
+| is_title    | TINYINT      |             done             |
+| team1       | INT          |             done             |
+| team2       | INT          |                 done         |
+| toss_team   | INT          |                          |
 | toss_decision | VARCHAR    |                          |
-| match_date  | VARCHAR      |                          |
-| match_time  | varchar      |                          |
+| match_date  | VARCHAR      |           done               |
+| match_time  | varchar      |          done                |
 | season      | INT          |         done                 |
 | team1_players | list<INT>  |                          |
 | team2_players | list<INT>  |                          |
-| team1_score | INT          |                          |
-| team1_wickets | INT         |                          |
-| team1_overs | DECIMAL      |                          |
-| team2_score | INT          |                          |
-| team2_wickets | INT         |                          |
-| team2_overs | DECIMAL      |                          |
+| team1_score | INT          |         done                 |
+| team1_wickets | INT         |            done              |
+| team1_overs | DECIMAL      |                 done         |
+| team2_score | INT          |                     done     |
+| team2_wickets | INT         |             done             |
+| team2_overs | DECIMAL      |               done        |
 | team2_target | INT         |                          |
-| winning_team | INT         |                          |
+| winning_team | INT         |          done                |
 | match_result | VARCHAR     |                          |
 | nature_of_wicket | VARCHAR |                          |
 | overall_nature | VARCHAR   |                          |
 | dew         | VARCHAR      |                          |
 | match_date_form | DATE      |                          |
-| load_timestamp | timestamp  |                          |
+| load_timestamp | timestamp  |              done            |
 
 **Table: MatchBallSummary**
 

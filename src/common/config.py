@@ -16,7 +16,9 @@ WAGONWHEEL_REQD_COLS = ['BallID', 'FielderAngle', 'FielderLengthRatio']
 MATCHES_RESULT_REQD_COLS = ["MatchID", "MatchDate", "MatchTime", "FirstBattingTeamID", "MatchDateOrder", "MatchName", \
                      "FirstBattingTeamName", "SecondBattingTeamID", "SecondBattingTeamName", \
                      "GroundName", "Comments", "TossTeam", "TossDetails", "FirstBattingSummary", \
-                     "SecondBattingSummary", "competition_name", "seasons"]
+                     "SecondBattingSummary"]
+
+######################################
 
 HOME_DIR = ''
 # below mentioned paths are for DEV purpose only, for prod, paths are being passed through run.sh
@@ -64,10 +66,7 @@ VENUE_KEY_COL = 'venue_id'
 # Matches Configs
 MATCHES_KEY_COL = 'match_id'
 MATCHES_TABLE_NAME = 'Matches'
-MATCHES_REQD_COLS = ["MatchID", "MatchDate", "MatchTime", "FirstBattingTeamID", "MatchDateOrder", "MatchName", \
-                     "FirstBattingTeamName", "SecondBattingTeamID", "SecondBattingTeamName", \
-                     "GroundName", "Comments", "TossTeam", "TossDetails", "FirstBattingSummary", \
-                     "SecondBattingSummary", "competition_name", "seasons"]
+
 
 
 BATTING_REQD_COLS = 'PlayerID', 'PlayingOrder', 'TeamID'
