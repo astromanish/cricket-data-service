@@ -9,7 +9,7 @@ Ball Summary
 
 | Column Name | Data Type    | Description              |
 |-------------|--------------|--------------------------|
-| team_id     | INT          |                          |
+| team_id     | INT          |    done                      |
 | src_team_id | VARCHAR      | done                 |
 | team_name   | VARCHAR      |      done            |
 | team_short_name | varchar  |       done              |
@@ -18,29 +18,29 @@ Ball Summary
 | playoffs    | INT          | done                 |
 | seasons_played | LIST<INT> | done                  |
 | titles      | INT          | done                 |
-| load_timestamp | timestamp  |                          |
+| load_timestamp | timestamp  |       done                   |
 
 **Table: Players**
 
 | Column Name | Data Type    | Description              |
 |-------------|--------------|--------------------------|
-| player_id   | INT          |                          |
-| src_player_id | VARCHAR    |                          |
-| player_name | VARCHAR      |                          |
+| player_id   | INT          |      done                    |
+| src_player_id | VARCHAR    |        done                  |
+| player_name | VARCHAR      |        done                  |
 | player_image_url | VARCHAR |                          |
-| team_id     | INT          |                          |
+| team_id     | INT          |         done                 |
 | competition_name | VARCHAR |                          |
 | season      | INT          |                          |
 | player_type | varchar      |                          |
-| batting_type | varchar     |                          |
-| bowling_type | varchar     |                          |
-| bowl_major_type | varchar  |                          |
-| player_skill | varchar     |                          |
-| is_captain  | TINYINT      |                          |
-| is_batsman  | TINYINT      |                          |
-| is_bowler   | TINYINT      |                          |
-| is_wicket_keeper | TINYINT |                          |
-| load_timestamp | timestamp  |                          |
+| batting_type | varchar     |             done             |
+| bowling_type | varchar     |             done             |
+| bowl_major_type | varchar  |              done            |
+| player_skill | varchar     |             done             |
+| is_captain  | TINYINT      |         done                 |
+| is_batsman  | TINYINT      |          done                |
+| is_bowler   | TINYINT      |           done               |
+| is_wicket_keeper | TINYINT |           done               |
+| load_timestamp | timestamp  |            done              |
 
 **Table: Venue**
 

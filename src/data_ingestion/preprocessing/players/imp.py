@@ -36,89 +36,96 @@ def getPlayerType(players_type_df):
 
 def getPlayersData(session, squad_data_files, other_tournament_data_files, mapping_sheet_path, load_timestamp):
     if squad_data_files or other_tournament_data_files:
-        if squad_data_files:
-            players_df = getSquadRawData(squad_data_files, SQUAD_KEY_LIST, PLAYERS_REQD_COLS) \
-                .drop_duplicates(subset=["TeamID", "PlayerName", "PlayerID", "season", "competition_name"],
-                                keep='last').reset_index()
+        players_df = getSquadRawData(squad_data_files, SQUAD_KEY_LIST, PLAYERS_REQD_COLS) \
+            .drop_duplicates(subset=["TeamID", "PlayerName", "PlayerID", "season", "competition_name"],
+                            keep='last').reset_index()
 
-            players_df['player_skill'] = players_df['PlayerSkill'].map(lambda x: x.strip().upper().replace('ALLRONDER',
-                                                                                                        'ALLROUNDER'))
-            players_df['is_batsman'] = np.where((players_df['player_skill'] == 'BATSMAN') |
-                                                (players_df['player_skill'] == 'ALLROUNDER')
-                                                | (players_df['player_skill'] == 'WICKETKEEPER'), 1, 0)
+        players_df['player_skill'] = players_df['PlayerSkill'].map(lambda x: x.strip().upper().replace('ALLRONDER',
+                                                                                                    'ALLROUNDER'))
+        players_df['is_batsman'] = np.where((players_df['player_skill'] == 'BATSMAN') |
+                                            (players_df['player_skill'] == 'ALLROUNDER')
+                                            | (players_df['player_skill'] == 'WICKETKEEPER'), 1, 0)
 
-            players_df['is_bowler'] = np.where((players_df['player_skill'] == 'BOWLER') |
-                                            (players_df['player_skill'] == 'ALLROUNDER'), 1, 0)
+        players_df['is_bowler'] = np.where((players_df['player_skill'] == 'BOWLER') |
+                                        (players_df['player_skill'] == 'ALLROUNDER'), 1, 0)
 
-            players_df['is_wicket_keeper'] = np.where(players_df['player_skill'] == 'WICKETKEEPER', 1, 0)
+        players_df['is_wicket_keeper'] = np.where(players_df['player_skill'] == 'WICKETKEEPER', 1, 0)
 
-            players_df['batting_type'] = players_df['BattingType'].map(lambda x: x.strip().upper())
-            players_df['bowling_type'] = players_df['BowlingProficiency'].map(lambda x: x.strip().upper())
-            players_df['bowling_type'] = players_df['bowling_type'].apply(lambda x: "LEFT ARM FAST"
-            if x == "LEFT ARM KNUCKLEBALL" else "RIGHT ARM FAST" if x == "RIGHT ARM KNUCKLEBALL" else x)
+        players_df['batting_type'] = players_df['BattingType'].map(lambda x: x.strip().upper())
+        players_df['bowling_type'] = players_df['BowlingProficiency'].map(lambda x: x.strip().upper())
+        players_df['bowling_type'] = players_df['bowling_type'].apply(lambda x: "LEFT ARM FAST"
+        if x == "LEFT ARM KNUCKLEBALL" else "RIGHT ARM FAST" if x == "RIGHT ARM KNUCKLEBALL" else x)
 
-            players_df['bowl_major_type'] = np.where((players_df['bowling_type'] == 'LEFT ARM FAST') |
-                                                    (players_df['bowling_type'] == 'RIGHT ARM FAST'), 'SEAM', 'SPIN')
+        players_df['bowl_major_type'] = np.where((players_df['bowling_type'] == 'LEFT ARM FAST') |
+                                                (players_df['bowling_type'] == 'RIGHT ARM FAST'), 'SEAM', 'SPIN')
 
-            players_df["player_name"] = players_df["PlayerName"].apply(lambda x: x.replace("'", "").replace('Akshar Patel', 'Axar Patel').replace('Jason Behrendroff', 'Jason Behrendorff'))
+        players_df["player_name"] = players_df["PlayerName"].apply(lambda x: x.replace("'", "").replace('Akshar Patel', 'Axar Patel').replace('Jason Behrendroff', 'Jason Behrendorff'))
 
-            # adding column load timestamp
-            players_df["load_timestamp"] = load_timestamp
+        players_df["load_timestamp"] = load_timestamp
 
-            players_df = players_df.drop(["BattingType", "BowlingProficiency", "PlayerSkill", "index", "PlayerName",
-                                        "src_match_id", "TeamID"]
-                                        , axis=1) \
-                .rename(columns={"PlayerID": "src_player_id", "IsCaptain": "is_captain", "TeamName": "team_name"})
+        players_df = players_df.drop(["BattingType", "BowlingProficiency", "PlayerSkill", "index", "PlayerName",
+                                    "src_match_id", "TeamID"]
+                                    , axis=1) \
+            .rename(columns={"PlayerID": "src_player_id", "IsCaptain": "is_captain", "TeamName": "team_name"})
 
-            players_df['season'] = players_df['season'].astype(int)
+        players_df['season'] = players_df['season'].astype(int)
 
-            players_df['player_image_url'] = (IMAGE_STORE_URL + 'players/' + players_df['player_name'].apply(lambda x: x.replace(' ', '-')
-                                                                                  .lower()).astype(str) + ".png")
+        players_df['player_image_url'] = (IMAGE_STORE_URL + 'players/' + players_df['player_name'].apply(lambda x: x.replace(' ', '-')
+                                                                                .lower()).astype(str) + ".png")
+        #############################################################
+        
+        
+        # other_players_df = getOtherPlayersData(players_df, other_tournament_data_files, mapping_sheet_path, load_timestamp)
+        
+        # players_df = players_df.append(other_players_df, ignore_index=True)
+    else:
+        players_df = pd.DataFrame(columns=['src_player_id', 'player_name', 'batting_type', 'bowling_type', 'player_skill',
+        'is_captain', 'is_batsman', 'is_bowler', 'is_wicket_keeper', 'bowl_major_type', 'player_image_url', 'season'])
+        # other_players_df = getOtherPlayersData(players_df, other_tournament_data_files, mapping_sheet_path, load_timestamp)
+        # players_df = other_players_df
 
-            other_players_df = getOtherPlayersData(players_df, other_tournament_data_files, mapping_sheet_path, load_timestamp)
-            
-            players_df = players_df.append(other_players_df, ignore_index=True)
-        else:
-            players_df = pd.DataFrame(columns=['src_player_id', 'player_name', 'batting_type', 'bowling_type', 'player_skill',
-            'is_captain', 'is_batsman', 'is_bowler', 'is_wicket_keeper', 'bowl_major_type', 'player_image_url', 'season'])
-            other_players_df = getOtherPlayersData(players_df, other_tournament_data_files, mapping_sheet_path, load_timestamp)
-            players_df = other_players_df
 
-        teams_df = getPandasFactoryDF(session, GET_TEAM_SQL)
+    ################### get some columns from aleady written teams df
+    
+    teams_df = getPandasFactoryDF(session, GET_TEAM_SQL)
 
-        players_df = players_df.merge(teams_df[["team_name", "team_id"]], on='team_name', how='left')
-        # Get existing df from target table
-        players_existing_df = getPandasFactoryDF(session, GET_PLAYERS_SQL)
+    players_df = players_df.merge(teams_df[["team_name", "team_id"]], on='team_name', how='left')
+    # Get existing df from target table
+    players_existing_df = getPandasFactoryDF(session, GET_PLAYERS_SQL)
 
-        players_latest_df = pd.merge(players_df, players_existing_df[['src_player_id', 'season', 'competition_name', 'team_id']],
-                                     how='left', on=['src_player_id', 'season', 'competition_name', 'team_id'], indicator=True)
+    players_latest_df = pd.merge(players_df, players_existing_df[['src_player_id', 'season', 'competition_name', 'team_id']],
+                                    how='left', on=['src_player_id', 'season', 'competition_name', 'team_id'], indicator=True)
 
-        players_df = players_latest_df[players_latest_df['_merge'] == "left_only"]
+    players_df = players_latest_df[players_latest_df['_merge'] == "left_only"]
 
-        if not players_df.empty:
+    ###############
+    
+    ############ handel existings players 
 
-            players_df = pd.merge(players_df, players_existing_df[['src_player_id', 'player_id']].drop_duplicates(),
-                                         how='left', on=['src_player_id'])
+    if not players_df.empty:
 
-            if 'player_id_y' in players_df.columns:
-                players_df = players_df.drop('player_id_y',axis=1).rename(columns={'player_id_x':'player_id'})
+        players_df = pd.merge(players_df, players_existing_df[['src_player_id', 'player_id']].drop_duplicates(),
+                                        how='left', on=['src_player_id'])
 
-            players_df = getPlayerType(players_df)[
-                ["player_id", "src_player_id", "player_name", "batting_type", "bowling_type", "player_skill",
-                 "team_id", "season", "competition_name", "is_captain", "is_batsman", "is_bowler",
-                 "is_wicket_keeper", "player_type", "bowl_major_type", "player_image_url", "load_timestamp"]]
+        if 'player_id_y' in players_df.columns:
+            players_df = players_df.drop('player_id_y',axis=1).rename(columns={'player_id_x':'player_id'})
 
-            new_players_df = players_df.loc[players_df['player_id'].isnull()]
+        players_df = getPlayerType(players_df)[
+            ["player_id", "src_player_id", "player_name", "batting_type", "bowling_type", "player_skill",
+                "team_id", "season", "competition_name", "is_captain", "is_batsman", "is_bowler",
+                "is_wicket_keeper", "player_type", "bowl_major_type", "player_image_url", "load_timestamp"]]
 
-            max_key_val = getMaxId(session, PLAYERS_TABLE_NAME, PLAYERS_KEY_COL, DB_NAME)
+        new_players_df = players_df.loc[players_df['player_id'].isnull()]
 
-            new_players_df['player_id'] = new_players_df['src_player_id'].rank(method='dense', ascending=False) \
-                .apply(lambda x: x + max_key_val).astype(int)
+        max_key_val = getMaxId(session, PLAYERS_TABLE_NAME, PLAYERS_KEY_COL, DB_NAME)
 
-            updated_players_df = players_df.loc[players_df['player_id'].notnull()].copy()
-            updated_players_df['player_id'] = updated_players_df['player_id'].astype(int)
+        new_players_df['player_id'] = new_players_df['src_player_id'].rank(method='dense', ascending=False) \
+            .apply(lambda x: x + max_key_val).astype(int)
 
-            players_final_df = new_players_df.append(updated_players_df)
-            players_final_df['team_id'] = players_final_df['team_id'].fillna(-1).astype(int)
- 
-            return players_final_df.to_dict(orient='records')
+        updated_players_df = players_df.loc[players_df['player_id'].notnull()].copy()
+        updated_players_df['player_id'] = updated_players_df['player_id'].astype(int)
+
+        players_final_df = new_players_df.append(updated_players_df)
+        players_final_df['team_id'] = players_final_df['team_id'].fillna(-1).astype(int)
+
+        return players_final_df.to_dict(orient='records')
