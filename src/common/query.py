@@ -1,12 +1,19 @@
 DB_NAME = 'duckdb_table'
 
+# matches table config
+
+GET_EXISTING_PLAYERS_DETAILS_SQL = f'''Select player_name, src_player_id, player_id 
+from {DB_NAME};'''
+
+GET_EXISTNG_TEAMS_DETAILS_SQL = f'''Select team_id, src_team_id, team_name, competition_name, seasons_played, titles, playoffs, 
+team_short_name from {DB_NAME};'''
+
+GET_EXISTING_VENUE_DETAILS_SQL = f'''Select stadium_name, src_venue_id, venue_id from {DB_NAME};'''
+
+#################################
+
 GET_EXISTING_FILES = f'''select file_name from {DB_NAME}.fileLogs'''
 
-GET_TEAM_SQL = f'''Select team_id, src_team_id, team_name, competition_name, seasons_played, titles, playoffs, 
-team_short_name from {DB_NAME}.Teams;'''
-
-GET_PLAYER_DETAILS_SQL = f'''Select player_name, src_player_id, player_id 
-from {DB_NAME}.Players;'''
 
 GET_PLAYERS_SQL = f'''Select player_id, src_player_id, season, competition_name, player_type, team_id, 
 player_name, bowling_type, batting_type from {DB_NAME}.Players;'''
