@@ -1,13 +1,20 @@
+Teams
+Players
+Venues
+Matches
+Ball Summary 
+
+
 **Table: Teams**
 
 | Column Name | Data Type    | Description              |
 |-------------|--------------|--------------------------|
 | team_id     | INT          |                          |
 | src_team_id | VARCHAR      | done                 |
-| team_name   | VARCHAR      |                  |
-| team_short_name | varchar  |                     |
+| team_name   | VARCHAR      |      done            |
+| team_short_name | varchar  |       done              |
 | competition_name | varchar | done                  |
-| team_image_url | VARCHAR   |                   |
+| team_image_url | VARCHAR   |      done             |
 | playoffs    | INT          | done                 |
 | seasons_played | LIST<INT> | done                  |
 | titles      | INT          | done                 |
