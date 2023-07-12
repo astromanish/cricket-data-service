@@ -22,6 +22,8 @@ Ball Summary
 
 **Table: Players**
 
+1. Merge with Teams DF you wrote
+
 | Column Name | Data Type    | Description              |
 |-------------|--------------|--------------------------|
 | player_id   | INT          |      done                    |
@@ -44,14 +46,16 @@ Ball Summary
 
 **Table: Venue**
 
+1. Find City and Country
+
 | Column Name | Data Type    | Description              |
 |-------------|--------------|--------------------------|
-| venue_id    | INT          |                          |
-| src_venue_id | varchar     |                          |
-| stadium_name | VARCHAR     |                          |
+| venue_id    | INT          |        done                  |
+| src_venue_id | varchar     |         done                 |
+| stadium_name | VARCHAR     |         done                 |
 | city        | VARCHAR      |                          |
 | country     | VARCHAR      |                          |
-| load_timestamp | timestamp  |                          |
+| load_timestamp | timestamp  |          done                |
 
 **Table: Matches**
 
